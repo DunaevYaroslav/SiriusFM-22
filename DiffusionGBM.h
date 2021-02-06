@@ -18,11 +18,11 @@ namespace SiriusFM{
                 if(const_sigma<=0){return 0;}
                 return const_sigma*St;
             }
-        DifffusionGBM(double const_m, double const_s)
-        :const_mu(const_m)
+        DiffusionGBM(double const_m, double const_s)
+        :const_mu(const_m),
          const_sigma(const_s)
         {
-            if(const_sigma<=0){throw std::invalid_argument('Bad arguments');}
+            if(const_sigma<=0){throw std::invalid_argument("Bad arguments");}
         }
-    }
+    };
 }
