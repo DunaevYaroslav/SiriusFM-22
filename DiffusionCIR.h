@@ -6,7 +6,7 @@
 #include <cmath>
 #include <thread>
 namespace SiriusFM{
-    class DiffusionOU
+    class DiffusionCIR
     {
         private:
             double const const_sigma;
@@ -22,7 +22,7 @@ namespace SiriusFM{
                 if(teta<=0){return 0;}
                 return const_sigma*sqrt(St);
             }
-        DiffusionOU(double const_s, double const_teta, double const_kappa)
+        DiffusionCIR(double const_s, double const_teta, double const_kappa)
         :const_sigma(const_s),
          kappa(const_kappa),
          teta(const_teta){

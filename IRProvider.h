@@ -8,6 +8,7 @@
 namespace SiriusFM{
     enum class CcyE
     {
+        UNDEFINED = -1,
         USD = 0,
         EUR = 1,
         GBP = 2,
@@ -44,10 +45,10 @@ namespace SiriusFM{
                 if(strcmp(a_str, "CHF")==0){
             return CcyE::CHF;
         }
-        /*else
+        else
         {
-            {throw...}
-        }*/
+            throw std::invalid_argument("Bad arg");
+        }
         
     }
     enum class IRmodeE
@@ -58,14 +59,4 @@ namespace SiriusFM{
     };
     template<IRmodeE IRM>
     class IRProvider;
- /*   template<>
-    class IRProvider<IRmodeE::Const>
-    {
-        private:
-        double m_IRS[int(CcyE::N)];
-        public:
-        IRProvider(std::string const & a_file);
-        double r(CcyE a_ccy, double a_t)
-        {return m_IRS[int(a_ccy)];}
-    };*/
 }

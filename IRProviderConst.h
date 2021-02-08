@@ -5,7 +5,7 @@
 #include <string>
 #include <cmath>
 #include <thread>
-#include"IRProvider.h"
+//#include"IRProvider.h"
 namespace SiriusFM{
     template<>
     class IRProvider<IRmodeE::Const>

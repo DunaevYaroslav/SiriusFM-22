@@ -31,7 +31,7 @@ namespace SiriusFM{
                 for(i=0;i<3;i++){
                     buff0[i]=buff[i];
                 }
-                m_IRS[Str2CcyE(buff0)]=r;
+                m_IRS[int(Str2CcyE(buff0))]=r;
             }
         }
     }

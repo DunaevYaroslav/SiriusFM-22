@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <cmath>
 #include <thread>
-#include"IRProvider.h"
-#include"IRProviderConst.h"
+//#include"IRProvider.h"
+//#include"IRProviderConst.h"
 #include"DiffusionOU.h"
 #include"DiffusionLipton.h"
 #include"DiffusionCEV.h"
