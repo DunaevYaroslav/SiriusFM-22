@@ -1,28 +1,22 @@
-#include <cmath>
-#include <ctime>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <thread>
-namespace SiriusFM{
-    class DiffusionGBM
-    {
-        private:
-            double const const_mu;
-            double const const_sigma;
-        public:
-            double mu(double St, double t) const{
-                return const_mu*St;
-            }
-            double sigma(double St, double t) const{
-                if(const_sigma<=0){return 0;}
-                return const_sigma*St;
-            }
-        DiffusionGBM(double const_m, double const_s)
-        :const_mu(const_m),
-         const_sigma(const_s)
-        {
-            if(const_sigma<=0){throw std::invalid_argument("Bad arguments");}
-        }
-    };
+#pragma once
+
+namespace SiriusFM
+{
+                
+	class DiffusionGBM
+	{
+		double const m_muBar;
+		double const m_sigmaBar;
+
+	public:
+		DiffusionGBM(double m, double s): m_muBar(m), m_sigmaBar(s)
+		{
+			if(m_sigmaBar <= 0)
+			{
+			}
+		};
+
+		double mu(double S_t, double a_t) const {return m_muBar * S_t;};
+		double sigma(double S_t, double a_t) const {return m_sigmaBar * S_t;};
+	};
 }

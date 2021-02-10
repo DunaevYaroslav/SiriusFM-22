@@ -1,38 +1,33 @@
-#include <cmath>
-#include <ctime>
-#include <fstream>
-#include <stdio.h>
+#include "IRProviderConst.h"
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
-#include <string>
-#include <stdlib.h>
-#include <cmath>
-#include <thread>
-#include"IRProvider.h"
-#include"IRProviderConst.h"
-namespace SiriusFM{
-    IRProvider<IRmodeE::Const>::IRProvider(char const * file){
-        FILE *fp;
-        //возможно стоит обнулить массив m_IRS предварительно
-        char buff[128];
-        char buff4[128];
-        char buff0[4];
-        double r;
-        int i;
-        if ((fp=fopen(file, "r") )==NULL) {
-            printf("Cannot open file.\n");
-        }
-        while(!feof (fp)) {
-            if (fgets(buff, 128, fp)){
-                buff[3]='\0';
-                for(i=0;i<124;i++){
-                    buff4[i]=buff[i+4];
-                }
-                r = atof(buff4);
-                for(i=0;i<3;i++){
-                    buff0[i]=buff[i];
-                }
-                m_IRS[int(Str2CcyE(buff0))]=r;
-            }
-        }
-    }
+
+#define BUF_SIZE 1024
+#define CCY_SIZE 3
+
+namespace SiriusFM
+{
+	IRProvider<IRModeE::Const>::IRProvider(const char* a_file)
+	{
+		FILE* src = fopen(a_file, "r");
+		char buf[BUF_SIZE];
+		char ccy[CCY_SIZE+1];
+
+		for(int k = 0; k < int(CcyE::N); ++k)
+			m_IRs[k] = 0;
+
+		if(a_file == nullptr) //check if a_file empty
+			return;
+
+		if(!src)
+			throw std::invalid_argument("Constructor");
+
+		while(fgets(ccy, CCY_SIZE+1, src))
+		{
+			fgets(buf, BUF_SIZE, src);
+			m_IRs[int(Str2CcyE(ccy))] = strtod(buf+2, NULL);//consider buf+1
+		}
+
+	}
 }

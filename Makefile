@@ -1,17 +1,17 @@
 TARGET = run
 
-SOURCES = main IRProviderConst
+SOURCES = Test1 IRProviderConst 
 
 EXTLIBS =
 
 CXXFLAGS += -MP -MMD -fPIC
 CXXFLAGS += -std=c++11
-CXXFLAGS += -Ofast -march=native
+CXXFLAGS += -O0 -g
 
 LDFLAGS += -fPIC
 LDFLAGS += -pthread
-LDFLAGS += -Wl,--as-needed
-LDFLAGS += -Wl,--no-undefined
+#LDFLAGS += -Wl,--as-needed
+#LDFLAGS += -Wl,--no-undefined
 
 
 BUILD_DIR = $(shell pwd)
@@ -32,7 +32,7 @@ $(OBJECTS_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $(realpath $<)
 
 $(TARGET) : $(OBJECTS_DIR) $(OBJECTS)
-	$(CXX) $(LDFLAGS) -o $(TARGET) $(OBJECTS) '-Wl,-(' $(EXTLIBS)
+	$(CXX) $(LDFLAGS) -o $(TARGET) $(OBJECTS) '-Wl' $(EXTLIBS)
 
 
 

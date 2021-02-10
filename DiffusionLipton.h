@@ -1,32 +1,32 @@
-#include <cmath>
-#include <ctime>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <cmath>
-#include <thread>
-namespace SiriusFM{
-    class DiffusionLipton
-    {
-        private:
-            double const const_sigma0;
-            double const const_sigma1;
-            double const const_sigma2;
-            double const const_mu;
-        public:
-            double mu(double St, double t) const{
-                return const_mu*St;
-            }
-            double sigma(double St, double t) const{
-                if(const_sigma0<=0 || const_sigma2<=0 || (pow(const_sigma1, 2.0) - 4*const_sigma0*const_sigma2>=0)){return 0;}
-                return const_sigma0+const_sigma1*St+const_sigma2*pow(St, 2.0);
-            }
-        DiffusionLipton(double const_s0, double const_s1, double const_s2, double const_m)
-        :const_sigma0(const_s0),
-         const_sigma1(const_s1),
-         const_sigma2(const_s2),
-         const_mu(const_m){
-        if(const_sigma0<=0 || const_sigma2<=0 || (pow(const_sigma1, 2.0) - 4*const_sigma0*const_sigma2>=0)){throw std::invalid_argument("Bad arguments");}
-         }
-    };
+#pragma once
+namespace SiriusFM
+{
+		class DiffusionLipton
+		{
+				double const m_mu;
+				double const m_sigma_0;
+				double const m_sigma_1;
+				double const m_sigma_2;
+
+			public:
+
+				DiffusionLipton(double m, double s0, double s1, double s2):
+				m_mu(m),
+				m_sigma_0(s0),
+				m_sigma_1(s1),
+				m_sigma_2(s2)
+				{
+						if(m_sigma_1 * m_sigma_1 >= 4 * m_sigma_0 * m_sigma_2)
+						{
+						}
+				};
+
+				double mu(double s){return m_mu * s;}
+				double sigma(double s)
+				{
+						return m_sigma_0 + m_sigma_1 * s + m_sigma_2 * s * s;
+				}
+		};
 }
+
+				
