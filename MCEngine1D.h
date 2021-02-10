@@ -3,6 +3,7 @@
 #include<cmath>
 #include<ctime>
 #include<stdexcept>
+#include<tuple>
 #include"Time.h"
 
 namespace SiriusFM
@@ -64,8 +65,8 @@ namespace SiriusFM
 		{
 			return
 			(m_L <= 0 || m_P <= 0)
-			? std::make_tuple (0, 0, nullptr)
-			: std::make_tuple (m_L, m_P, m_paths);
+			? std::tuple (0, 0, nullptr)
+			: std::tuple (m_L, m_P, m_paths);
 		};
 
 		~MCEngine1D(){delete [] m_paths;};
